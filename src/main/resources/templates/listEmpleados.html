@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <body>
+
+        <main>
+            <div class="container px-4 py-5">
+                <h1 class="pb-2 border-bottom">Empleados Totales</h1>
+                <div class="d-flex mt-3 mb-4">
+                    <a class="btn btn-primary" th:href="@{'/employee/new'}">Nuevo Empleado</a>
+                    <a class="btn btn-secondary ms-auto" th:href="@{'/employee/inicio'}">Regresar</a>
+                </div>
+                <form method="post" th:action="@{/employee/BuscarEmpleados}">
+                    <input name="searchField" class="form-control mb-3" type="text" placeholder="Search"/>
+                </form>
+                <table class="table">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellido</th>
+                        <th scope="col">Puesto</th>
+                        <th scope="col">Departamento</th>
+                        <th scope="col">Ciudad</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    <tr th:each="empleado, info : ${listaEmpleados}">
+                        <td th:text="${info.index + 1}"></td>
+                        <td th:text="${empleado.getFirstName()}"></td>
+                        <td th:text="${empleado.getLastName()}"></td>
+                        <td th:text="${empleado.job.jobTitle}"></td>
+                        <td th:text="${empleado.department.getDepartmentName()}"></td>
+                        <td th:text="${empleado.department.location.getCity()}"></td>
+                        <td><a class="btn btn-primary" th:href="@{'/employee/edit?id=' + ${empleado.employeeId}}">Editar</a>
+                        </td>
+                        <td><a class="btn btn-danger" th:href="@{'/employee/delete?id=' + ${empleado.employeeId}}">Borrar</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </main>
+    </body>
+</html>
