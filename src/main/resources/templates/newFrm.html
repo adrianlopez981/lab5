@@ -2,23 +2,84 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
         <title>Nuevo Ingreso</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Bootstrap -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+                crossorigin="anonymous"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+
+        <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
     </head>
     <body>
         <main>
             <div class="container px-4 py-5">
                 <h1 class="pb-2 mb-3 border-bottom">Nuevo Ingreso</h1>
-                <form method="post" th:action="@{/employee/save}" class="mt-2">
+                <form th:object="${employee}" method="post" th:action="@{/employee/save}" class="mt-2">
                     <div class="mb-3">
-                        <label for="companyname" class="form-label">Nombre de la compañía</label>
-                        <input name="companyname" type="text" class="form-control" id="companyname">
+                        <label for="firstName" class="form-label">Nombre</label>
+                        <input name="firstName" type="text" class="form-control" id="firstName" th:field="*{firstName}">
                     </div>
                     <div class="mb-3">
-                        <label for="phone" class="form-label">Teléfono</label>
-                        <input name="phone" type="text" class="form-control" id="phone">
+                        <label for="lastName" class="form-label">Apellido</label>
+                        <input name="lastName" type="text" class="form-control" id="lastName" th:field="*{lastName}">
                     </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input name="email" type="text" class="form-control" id="email" th:field="*{email}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Contraseña</label>
+                        <input name="password" type="text" class="form-control" id="password" th:field="*{password}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="phoneNumber" class="form-label">Teléfono</label>
+                        <input name="phoneNumber" type="text" class="form-control" id="phoneNumber" th:field="*{phoneNumber}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="hireDate" class="form-label">Fecha de Contratación (AAAA-MM-DD)</label>
+                        <input name="hireDate" type="date" class="form-control" id="hireDate" th:field="*{hireDate}" th:value="${#dates.format(employee.hireDate, 'yyyy-MM-dd')}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="job" class="form-label">Puesto</label>
+                        <select name="job" class="form-select" id="job" th:field="*{job_id}">
+                            <option th:each="job : ${listaJobs}" th:text="${job.jobTitle}"
+                                    th:value="${job.getJob_id()}"></option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="salary" class="form-label">Sueldo</label>
+                        <input name="salary" type="number" class="form-control" id="salary" th:field="*{salary}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="commissionPct" class="form-label">Comission Pct</label>
+                        <input name="commissionPct" type="text" class="form-control" id="commissionPct" th:field="*{commissionPct}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="department" class="form-label">Departamento</label>
+                        <select name="department" class="form-select" id="department" th:field="*{department}">
+                            <option th:each="department : ${listaDepartments}" th:text="${department.departmentName}"
+                                    th:value="${department.departmentId}"></option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="manager_id" class="form-label">Manager</label>
+                        <select name="manager_id" class="form-select" id="manager_id" th:field="*{managerId}">
+                            <option th:each="manager : ${listaManager}" th:text="${manager.firstName + ' ' + manager.lastName}"
+                                    th:value="${manager.employeeId}"></option>
+                        </select>
+                    </div>
+
+                    <input th:value="1" name="enabled" type="hidden"/>
+                    <div class="form-group d-none">
+                        <label for="enabled">Enabled:</label>
+                        <input type="text" id="enabled" name="enabled" th:field="*{enabled}" th:readonly="true" />
+                    </div>
+
                     <a th:href="@{'/employee/inicio'}" class="btn btn-danger">Cancelar</a>
                     <button type="submit" class="btn btn-primary">Registrar</button>
                 </form>
@@ -26,4 +87,13 @@
         </main>
         <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
     </body>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
 </html>

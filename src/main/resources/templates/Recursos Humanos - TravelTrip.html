@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8">
         <title>Title</title>
@@ -14,19 +14,11 @@
               integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     </head>
     <body>
-        <nav class="navbar navbar-light bg-light justify-content-between">
+
+        <div th:insert="~{fragments/cabecera.html::navbar}"></div>
 
 
-            <a class="btn btn-primary" href="#" role="button">Empleados</a>
-            <a class="btn btn-primary" href="#" role="button">Historial</a>
-            <a class="btn btn-primary" href="#" role="button">Reportes</a>
 
-
-<!--            <form class="form-inline">-->
-<!--                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">-->
-<!--                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
-<!--            </form>-->
-        </nav>
         <img th:src="@{'travel_trip_logo.png'}" alt="imagenLogo" class="img-fluid rounded-circle w-50" >
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
                 integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -38,4 +30,5 @@
                 integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
                 crossorigin="anonymous"></script>
     </body>
+
 </html>

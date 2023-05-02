@@ -10,10 +10,9 @@ import lombok.Setter;
 @Table(name = "jobs")
 
 public class Job {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "job_id")
-    private String jobId;
+    private String job_id;
     @Basic
     @Column(name = "job_title")
     private String jobTitle;

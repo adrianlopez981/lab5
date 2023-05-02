@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Reportes - Sueldos</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Bootstrap -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+                crossorigin="anonymous"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+              crossorigin="anonymous">
+
+    </head>
+    <body>
+        <div th:insert="~{fragments/cabecera.html::navbar}"></div>
+        <main>
+
+            <div class="container px-4 py-5">
+                <h1 class="pb-2 border-bottom">Reportes - Sueldos</h1>
+                <div/>
+
+                <table class="table">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Puesto</th>
+                        <th scope="col">Salario Máximo</th>
+                        <th scope="col">Salario Mínimo</th>
+                        <th scope="col">Salario Total</th>
+                        <th scope="col">Salario Promedio</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    <tr th:each="reporte, info : ${listaReportes}">
+                        <td th:text="${info.index + 1}"></td>
+                        <td th:text="${reporte.getJobtitle()}"></td>
+                        <td th:text="${reporte.getSalariominimo()}"></td>
+                        <td th:text="${reporte.getSalariomaximo()}"></td>
+                        <td th:text="${reporte.getSumasalarios()}"></td>
+                        <td th:text="${reporte.getSalariopromedio()}"></td>
+
+                    </tr>
+                </table>
+
+
+        </main>
+
+
+    </body>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+</html>
